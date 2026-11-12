@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090713">
+<title>FF Aim Panel | Training Dashboard</title>
+<style>
+:root{--bg:#090713;--panel:#151126;--panel2:#1c1633;--line:#38245e;--purple:#9b35ff;--pink:#d45cff;--text:#f7f1ff;--muted:#b8aeca;--green:#31e58c;--gold:#ffc94a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 10%,#291044 0,transparent 28%),radial-gradient(circle at 90% 80%,#1b123b 0,transparent 30%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 22px;border-bottom:1px solid var(--line);background:#0d0919eF;position:sticky;top:0;z-index:5}
+.brand{font-size:clamp(18px,3vw,27px);font-weight:900;letter-spacing:.5px}.brand span{color:var(--pink)}.status{color:var(--green);font-size:13px}.wrap{max-width:1250px;margin:auto;padding:22px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-bottom:18px}
+.panel{background:linear-gradient(145deg,#1a1430ee,#100d1fee);border:1px solid var(--line);border-radius:17px;padding:19px;box-shadow:0 12px 35px #0005}
+h1{font-size:clamp(25px,4vw,38px);margin:0 0 9px}h1 span,.accent{color:var(--pink)}p{color:var(--muted);line-height:1.7;margin:6px 0}
+.pill{display:inline-block;border:1px solid #6e38a5;border-radius:99px;padding:5px 10px;color:#dfb9ff;font-size:12px;margin-bottom:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.stat{background:#100d1d;border:1px solid var(--line);border-radius:13px;padding:15px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:8px}
+.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.section-title h2{margin:0;font-size:20px}.muted{color:var(--muted);font-size:13px}
+.arena{height:330px;position:relative;overflow:hidden;border-radius:13px;border:1px solid #58318b;background:linear-gradient(#151d31,#28213c 60%,#171126);cursor:crosshair;touch-action:manipulation}
+.arena:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49.8%,#ffffff0c 50%,transparent 50.2%),linear-gradient(transparent 49.8%,#ffffff0c 50%,transparent 50.2%);background-size:40px 40px;opacity:.6}
+.target{position:absolute;width:42px;height:42px;border:4px solid #ff4d91;border-radius:50%;background:#ff4d9133;box-shadow:0 0 18px #ff4d91;transform:translate(-50%,-50%);display:none}
+.target:before,.target:after{content:"";position:absolute;background:#fff;left:50%;top:50%;transform:translate(-50%,-50%)}.target:before{width:4px;height:58px}.target:after{height:4px;width:58px}
+.arena-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#d8c8ed;padding:20px;pointer-events:none}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.btn{border:0;border-radius:10px;padding:12px 17px;font-weight:800;color:white;background:linear-gradient(100deg,#8125e8,#bd35ff)}.btn.secondary{background:#30234a;border:1px solid #5c3b83}.btn:disabled{opacity:.5;cursor:not-allowed}
+.field{margin:15px 0}.field label{display:flex;justify-content:space-between;color:#e8ddf5;margin-bottom:8px}.field input{width:100%;accent-color:var(--purple)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini{background:#100d1d;border:1px solid var(--line);padding:12px;border-radius:11px}.mini strong{display:block;font-size:20px;margin-top:5px}
+select{width:100%;padding:11px;background:#100d1d;color:white;border:1px solid var(--line);border-radius:9px}
+.history{margin-top:18px}.history-row{display:flex;justify-content:space-between;gap:10px;padding:11px 4px;border-bottom:1px solid #ffffff12;color:#e8ddf5;font-size:14px}
+.note{font-size:12px;color:var(--muted);margin-top:12px}.footer{text-align:center;color:#8d7fa4;padding:24px;font-size:12px}
+@media(max-width:850px){.hero,.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wrap{padding:13px}.top{padding:13px}.stats{gap:8px}.stat{padding:11px}.stat strong{font-size:23px}.arena{height:270px}.grid2{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">FREE <span>FIRE</span> | AIM PANEL <span>v2.0</span></div>
+  <div class="status">● جاهز للتدريب</div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="panel">
+      <span class="pill">لوحة تدريب مستقلة</span>
+      <h1>طوّر تصويبك، <span>ماتش ورا ماتش.</span></h1>
+      <p>تدريب سرعة رد الفعل وتتبع نتائجك وضبط إعداداتك الشخصية. اللوحة لا تتصل بلعبة Free Fire ولا تغيّر ملفاتها.</p>
+      <div class="stats">
+        <div class="stat"><small>إجمالي النقرات</small><strong id="total">0</strong></div>
+        <div class="stat"><small>الأهداف المصابة</small><strong id="hits">0</strong></div>
+        <div class="stat"><small>الدقة</small><strong id="accuracy">0%</strong></div>
+        <div class="stat"><small>أفضل سلسلة</small><strong id="streak">0</strong></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="section-title"><h2>إعدادات جلسة التدريب</h2><span class="accent">⚙</span></div>
+      <div class="field"><label for="duration">مدة الجلسة <b id="durationLabel">60 ثانية</b></label><input id="duration" type="range" min="30" max="180" step="15" value="60"></div>
+      <div class="field"><label for="targetSize">حجم الهدف <b id="sizeLabel">متوسط</b></label><input id="targetSize" type="range" min="26" max="64" value="42"></div>
+      <div class="field"><label for="mode">وضع التدريب</label><select id="mode"><option value="precision">دقة التصويب</option><option value="speed">سرعة رد الفعل</option></select></div>
+      <p class="note">كل جلسة بتتسجل محلياً على نفس الجهاز والمتصفح.</p>
+    </div>
+  </section>
+  <section class="layout">
+    <div class="panel">
+      <div class="section-title"><h2>🎯 ساحة التصويب</h2><span class="muted" id="timer">الوقت: 00:00</span></div>
+      <div class="arena" id="arena" aria-label="ساحة تدريب التصويب">
+        <div class="arena-msg" id="arenaMsg">اضغط «ابدأ التدريب» ثم انقر على الأهداف التي تظهر داخل الساحة.</div>
+        <div class="target" id="target"></div>
+      </div>
+      <div class="controls">
+        <button class="btn" id="start">ابدأ التدريب</button>
+        <button class="btn secondary" id="stop" disabled>إنهاء الجلسة</button>
+        <button class="btn secondary" id="reset">تصفير الإحصائيات</button>
+      </div>
+      <div class="grid2" style="margin-top:13px">
+        <div class="mini"><span class="muted">إصابات الجلسة</span><strong id="sessionHits">0</strong></div>
+        <div class="mini"><span class="muted">متوسط زمن الإصابة</span><strong id="reaction">—</strong></div>
+      </div>
+    </div>
+    <aside>
+      <div class="panel">
+        <div class="section-title"><h2>حساسية مقترحة للتجربة</h2><span class="accent">✦</span></div>
+        <p class="muted">دي قيم تحفظها وتقارن بينها بنفسك، ومش بتتطبق تلقائياً على اللعبة.</p>
+        <div id="sliders"></div>
+        <div class="controls"><button class="btn" id="saveSettings">حفظ الإعدادات</button><button class="btn secondary" id="resetSettings">استعادة الافتراضي</button></div>
+        <p class="note" id="saveMsg" aria-live="polite"></p>
+      </div>
+      <div class="panel history">
+        <div class="section-title"><h2>آخر الجلسات</h2><span class="muted">محفوظة محلياً</span></div>
+        <div id="history"><p class="muted">لسه مفيش جلسات مسجلة.</p></div>
+      </div>
+    </aside>
+  </section>
+  <div class="footer">AIM BETTER. PLAY BETTER. · أداة تدريب مستقلة غير رسمية، وليست تابعة لشركة Garena.</div>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const KEY = 'ffAimPanelDataV2';
+  const defaults = {General:95, RedDot:90, Scope2x:75, Scope4x:65, AWM:50};
+  let saved;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { saved = {}; }
+  const data = {
+    total: Number(saved.total)||0, hits: Number(saved.hits)||0,
+    best: Number(saved.best)||0, history: Array.isArray(saved.history)?saved.history:[],
+    settings: {...defaults, ...(saved.settings||{})}
+  };
+  let active=false, remaining=60, interval=null, startedAt=0, lastTargetAt=0;
+  let sessionHits=0, sessionClicks=0, streak=0, bestSession=0, reactionTimes=[];
+  const target=$('target'), arena=$('arena');
+  function persist(){
+    localStorage.setItem(KEY, JSON.stringify({...data}));
+    renderStats();
+  }
+  function renderStats(){
+    $('total').textContent=data.total;
+    $('hits').textContent=data.hits;
+    $('accuracy').textContent=(data.total?Math.round(data.hits/data.total*100):0)+'%';
+    $('streak').textContent=data.best;
+    $('history').innerHTML='';
+    if(!data.history.length){$('history').innerHTML='<p class="muted">لسه مفيش جلسات مسجلة.</p>';return;}
+    data.history.slice(0,5).forEach((h,i)=>{
+      const row=document.createElement('div');row.className='history-row';
+      const a=document.createElement('span');a.textContent=`جلسة ${data.history.length-i}`;
+      const b=document.createElement('b');b.textContent=`${h.hits} إصابة · ${h.accuracy}%`;
+      row.append(a,b);$('history').append(row);
+    });
+  }
+  function buildSliders(){
+    const labels={General:'عام',RedDot:'ريد دوت',Scope2x:'سكوب 2x',Scope4x:'سكوب 4x',AWM:'AWM'};
+    const host=$('sliders');host.innerHTML='';
+    Object.entries(labels).forEach(([key,label])=>{
+      const wrap=document.createElement('div');wrap.className='field';
+      const lab=document.createElement('label');lab.htmlFor='s_'+key;
+      const name=document.createElement('span');name.textContent=label;
+      const val=document.createElement('b');val.id='v_'+key;val.textContent=data.settings[key];
+      lab.append(name,val);
+      const input=document.createElement('input');input.type='range';input.min=0;input.max=200;input.value=data.settings[key];input.id='s_'+key;
+      input.addEventListener('input',()=>{data.settings[key]=Number(input.value);val.textContent=input.value;});
+      wrap.append(lab,input);host.append(wrap);
+    });
+  }
+  function moveTarget(){
+    const rect=arena.getBoundingClientRect(), size=Number($('targetSize').value);
+    target.style.width=size+'px';target.style.height=size+'px';
+    const pad=size/2+8;
+    const x=pad+Math.random()*(rect.width-2*pad);
+    const y=pad+Math.random()*(rect.height-2*pad);
+    target.style.left=x+'px';target.style.top=y+'px';
+    target.style.display='block';lastTargetAt=performance.now();
+  }
+  function clock(){
+    const m=String(Math.floor(remaining/60)).padStart(2,'0');
+    const s=String(remaining%60).padStart(2,'0');
+    $('timer').textContent=`الوقت: ${m}:${s}`;
+  }
+  function finish(){
+    if(!active)return;
+    active=false;clearInterval(interval);interval=null;target.style.display='none';
+    $('start').disabled=false;$('stop').disabled=true;
+    $('arenaMsg').style.display='grid';
+    $('arenaMsg').textContent=`انتهت الجلسة! حققت ${sessionHits} إصابة من ${sessionClicks} محاولة.`;
+    const accuracy=sessionClicks?Math.round(sessionHits/sessionClicks*100):0;
+    data.history.unshift({hits:sessionHits,accuracy,date:new Date().toISOString()});
+    data.history=data.history.slice(0,20);persist();
+  }
+  function start(){
+    if(active)return;
+    active=true;remaining=Number($('duration').value);
+    sessionHits=0;sessionClicks=0;streak=0;bestSession=0;reactionTimes=[];
+    $('sessionHits').textContent='0';$('reaction').textContent='—';
+    $('arenaMsg').style.display='none';$('start').disabled=true;$('stop').disabled=false;
+    clock();moveTarget();
+    interval=setInterval(()=>{remaining--;clock();if(remaining<=0)finish();},1000);
+  }
+  arena.addEventListener('pointerdown',e=>{
+    if(!active)return;
+    sessionClicks++;data.total++;
+    if(e.target===target){
+      sessionHits++;data.hits++;streak++;bestSession=Math.max(bestSession,streak);
+      reactionTimes.push(performance.now()-lastTargetAt);
+      $('sessionHits').textContent=sessionHits;
+      const avg=reactionTimes.reduce((a,b)=>a+b,0)/reactionTimes.length;
+      $('reaction').textContent=(avg/1000).toFixed(2)+' ث';
+      data.best=Math.max(data.best,bestSession);
+      moveTarget();
+    } else {streak=0;}
+    persist();
+  });
+  $('start').addEventListener('click',start);
+  $('stop').addEventListener('click',finish);
+  $('duration').addEventListener('input',()=>{$('durationLabel').textContent=$('duration').value+' ثانية';});
+  $('targetSize').addEventListener('input',()=>{
+    const v=Number($('targetSize').value);
+    $('sizeLabel').textContent=v<36?'صغير':v>52?'كبير':'متوسط';
+  });
+  $('saveSettings').addEventListener('click',()=>{persist();$('saveMsg').textContent='تم حفظ القيم على هذا الجهاز.';});
+  $('resetSettings').addEventListener('click',()=>{data.settings={...defaults};buildSliders();persist();$('saveMsg').textContent='تمت استعادة القيم الافتراضية.';});
+  $('reset').addEventListener('click',()=>{
+    if(!confirm('متأكد إنك عايز تصفّر كل الإحصائيات؟'))return;
+    if(active)finish();
+    data.total=0;data.hits=0;data.best=0;data.history=[];persist();
+    $('sessionHits').textContent='0';$('reaction').textContent='—';
+  });
+  buildSliders();renderStats();clock();
+})();
+</script>
+</body>
+</html>
